@@ -1,0 +1,1 @@
+EXTENSIONS_DIR=$FW_TARGETDIR/freertos_apps/microros_kria_kr260_extensions
