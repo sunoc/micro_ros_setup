@@ -4,15 +4,17 @@ pushd $FW_TARGETDIR >/dev/null
 
 
     # Install toolchain
+    # Since the build can happen on a separated desktop PC or on the KRIA
+    # board's own Linux, both x86_64 and 64-bits ARM cases are covered.
     echo "Downloading ARM compiler, this may take a while"
     if [ $(uname -m) = "x86_64" ]; then
-	wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
-	tar --strip-components=1 -xvjf gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2 -C toolchain > /dev/null
-	rm gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
+	wget https://developer.arm.com/-/media/Files/downloads/gnu/14.2.rel1/binrel/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz
+	tar --strip-components=1 -xvf arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz
+	rm arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz
     elif [ $(uname -m) = "aarch64" ]; then
-	wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-aarch64-linux.tar.bz2
-	tar --strip-components=1 -xvjf gcc-arm-none-eabi-10.3-2021.10-aarch64-linux.tar.bz2 -C toolchain > /dev/null
-	rm gcc-arm-none-eabi-10.3-2021.10-aarch64-linux.tar.bz2
+	wget https://developer.arm.com/-/media/Files/downloads/gnu/14.2.rel1/binrel/arm-gnu-toolchain-14.2.rel1-aarch64-arm-none-eabi.tar.xz
+	tar --strip-components=1 -xvf arm-gnu-toolchain-14.2.rel1-aarch64-arm-none-eabi.tar.xz
+	rm arm-gnu-toolchain-14.2.rel1-aarch64-arm-none-eabi.tar.xz
     else
 	echo "Unknown architecture used to build micro-ROS. Exiting with code 1."
 	exit 1
