@@ -19,8 +19,9 @@ pushd $FW_TARGETDIR >/dev/null
 	echo "Unknown architecture used to build micro-ROS. Exiting with code 1."
 	exit 1
     fi
+
     # Import repos
-    vcs import --input $PREFIX/config/$RTOS/$PLATFORM/board.repos
+    vcs import --input $PREFIX/config/$RTOS/$PLATFORM/board.repos --recursive
 
     # ignore broken packages
     touch mcu_ws/ros2/rcl_logging/rcl_logging_spdlog/COLCON_IGNORE
